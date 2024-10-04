@@ -11,6 +11,7 @@ const app = express()
 const static = require("./routes/static")
 const expressLayouts = require("express-ejs-layouts")
 const baseController = require("./controllers/baseController")
+const invCont = require("./controllers/invController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require("./utilities/")
 
@@ -19,7 +20,7 @@ const utilities = require("./utilities/")
  *************************/
 app.set("view engine", "ejs")
 app.use(expressLayouts)
-app.set("layout", "./layouts/layout") //not at views roo
+app.set("layout", "./layouts/layout")
 
 /* ***********************
  * Routes
@@ -30,6 +31,7 @@ app.use(static)
 // })
 app.get("/", utilities.handleErrors(baseController.buildHome))
 app.use("/inv", inventoryRoute)
+
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})

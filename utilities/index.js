@@ -6,7 +6,7 @@ const Util = {}
  ************************** */
 Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications()
-  console.log(data)
+  //console.log(data)
   let list = "<ul>"
   list += '<li><a href="/" title="Home page">Home</a></li>'
   data.rows.forEach((row) => {
@@ -55,6 +55,30 @@ Util.buildClassificationGrid = async function(data){
     } else { 
       grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
     }
+    return grid
+  }
+
+/* **************************************
+* Build the single item view HTML
+* ************************************ */
+  Util.buildVehicleDetail = async function(data){
+    let grid = '<h1>' + data.inv_year + " " + data.inv_make + " " + data.inv_model + '</h1>'
+    grid += '<div class="lowerSection">'
+    grid += '<section class="content">'
+    grid += '<div>'
+    grid += '<img src="' + data.inv_image + '"></>'
+    grid += '</div>'
+    grid += '<div class="carDetails">'
+    grid += '<h2>' + data.inv_make + " " + data.inv_model + '</h2>'
+    let formattedPrice = Number(data.inv_price).toLocaleString();
+    let formattedMiles = Number(data.inv_miles).toLocaleString();
+    grid += '<p>Price: $' + formattedPrice + '</p>'
+    grid += '<p>Description: ' + data.inv_description + '</p>'
+    grid += '<p>Color: ' + data.inv_color + '</p>'
+    grid += '<p>Miles: ' + formattedMiles + '</p>'
+    grid += '</section>'
+    grid += '</div>'
+    grid += '</div>'
     return grid
   }
 
