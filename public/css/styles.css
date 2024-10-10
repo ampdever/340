@@ -102,9 +102,9 @@ button {
   width: 150px;
 }
 
-button:hover {
-  /* background-color: #0056b3; */
-}
+/* button:hover {
+  /* background-color: #0056b3;
+} */
 
 .subDelorian {
   display: flex;
@@ -194,4 +194,123 @@ footer {
 .carDetails {
   font-size: 1.3rem;
   padding: 10px;
+}
+
+/* FORM LOGIN PAGE */
+.formInformation {
+  background-color: var(--main-accent);
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+  margin: 20px auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  color: black;
+  font-size: 14px;
+}
+
+.formInformation label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.formInformation input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.formInformation p {
+  font-size: 12px;
+  color: #333;
+  margin: 10px 0;
+}
+
+.formInformation button {
+  width: 100%;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.formInformation button:hover {
+  background-color: #555;
+}
+
+#showPasswordButton {
+  margin-bottom: 10px;
+}
+
+.formInformation a {
+  color: #000;
+  text-decoration: none;
+}
+
+.formInformation a:hover {
+  text-decoration: underline;
+}
+
+/* FORM REGISTER PAGE */
+.registerInformation {
+  background-color: var(--main-accent);
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+  margin: 20px auto; /* Center the form */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  color: black;
+  font-size: 14px;
+}
+
+.registerInformation p {
+  font-size: 12px;
+  color: black;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.registerInformation label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.registerInformation input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.registerInformation button {
+  width: 100%;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.registerInformation button:hover {
+  background-color: #555;
+}
+
+#showPasswordButton {
+  margin-bottom: 10px;
+}
+
+.registerInformation a {
+  color: #000;
+  text-decoration: none;
+}
+
+.registerInformation a:hover {
+  text-decoration: underline;
 }
