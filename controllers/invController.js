@@ -58,9 +58,11 @@ invCont.buildAddClassification = async function (req, res, next) {
 
 invCont.buildAddInventory = async function (req, res, next) {
   let nav = await utilities.getNav()
+  const classificationList = await utilities.buildClassificationList()
   res.render("inventory/add-inventory", {
     title: "Add Inventory",
     nav,
+    classificationList,
     errors: null,
   })
 }
@@ -102,9 +104,9 @@ invCont.handleAddInventory = async function (req, res) {
 
   //moved this line here so the Nav is built after the new classification was submitted
   let nav = await utilities.getNav()
-
+  const classificationList = await utilities.buildClassificationList(classification_id)
   // If there aren't any rows returned then we are going to be passed through to the error
-  if (regResult.rows) {
+  if (regResult) {
     req.flash(
       "notice",
       `The ${inv_model} was added successfully`
@@ -116,8 +118,20 @@ invCont.handleAddInventory = async function (req, res) {
   } else {
     req.flash("notice", "Sorry, the registration failed.")
     res.status(501).render("inventory/add-inventory", {
-      title: "Add Inventory",
+      title: "New Inventory",
       nav,
+      classificationList,
+      errors: req.flash(),
+      classification_id,
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color
     })
   }
 }

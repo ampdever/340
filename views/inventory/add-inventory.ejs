@@ -15,13 +15,7 @@
 
     <form class="add-inventory" action="/inv/add-inventory" method="post">
         <label for="classification_id">Classification:</label>
-        <select id="classification_id" name="classification_id" required value="<%= locals.classification_id %>">
-            <!-- <% classifications.forEach(classification => { %>
-                <option value="<%= classification.classification_id %>">
-                    <%= classification.classification_name %>
-                </option>
-            <% }) %> -->
-        </select>
+          <%- classificationList %>
 
         <label for="inv_make">Make</label>
         <input type="text" id="inv_make" name="inv_make" required value="<%= locals.inv_make %>">
@@ -30,13 +24,13 @@
         <input type="text" id="inv_model" name="inv_model" required value="<%= locals.inv_model %>">
 
         <label for="inv_description">Description</label>
-        <textarea id="inv_description" name="inv_description" required value="<%= locals.inv_description %>"></textarea>
+        <input type="text" id="inv_description" name="inv_description" required value="<%= locals.inv_description %>">
 
         <label for="inv_image">Image Path</label>
-        <input type="text" id="inv_image" name="inv_image" required value="<%= locals.inv_image %>">
+        <input type="text" id="inv_image" name="inv_image" required value="/images/vehicles/no-image.png">
 
         <label for="inv_thumbnail">Thumbnail Path</label>
-        <input type="text" id="inv_thumbnail" name="inv_thumbnail" required value="<%= locals.inv_thumbnail %>">
+        <input type="text" id="inv_thumbnail" name="inv_thumbnail" required value="/images/vehicles/no-image.png">
 
         <label for="inv_price">Price</label>
         <input type="number" id="inv_price" name="inv_price" required value="<%= locals.inv_price %>">

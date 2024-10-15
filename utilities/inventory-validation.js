@@ -47,16 +47,15 @@ validate.checkClassificationData = async (req, res, next) => {
   * ********************************* */
 validate.inventoryRules = () => {
     return [
-      // firstname is required and must be string
-      body("classification_id")
-        .trim()
-        .escape()
-        .notEmpty()
-        .isLength({ min: 1 })
-        .matches("^[A-Za-z]+$")
-        .withMessage("Please provide a classification name as per the instructions."), // on error this message is sent.
 
-      // lastname is required and must be string
+      // body("classification_id")
+      //   .trim()
+      //   .escape()
+      //   .notEmpty()
+      //   .isLength({ min: 1 })
+      //   .withMessage("Please provide a classification of the car"), // on error this message is sent.
+
+
       body("inv_make")
       .trim()
       .escape()
@@ -64,7 +63,7 @@ validate.inventoryRules = () => {
       .isLength({ min: 3 })
       .withMessage("Please provide the make of the car"), // on error this message is sent.
    
-        // lastname is required and must be string
+
         body("inv_model")
         .trim()
         .escape()
@@ -72,29 +71,29 @@ validate.inventoryRules = () => {
         .isLength({ min: 3 })
         .withMessage("Please provide the model of the car"), // on error this message is sent.   
 
-        // lastname is required and must be string
-      body("inv_decription")
+
+      body("inv_description")
       .trim()
       .escape()
       .notEmpty()
       .isLength({ min: 3 })
       .withMessage("Please provide a description of the car"), // on error this message is sent.
       
-      // lastname is required and must be string
+
       body("inv_image")
       .trim()
       .escape()
       .notEmpty()
       .withMessage("Please provide an image of the car"), // on error this message is sent.
 
-      // lastname is required and must be string
+
       body("inv_thumbnail")
       .trim()
       .escape()
       .notEmpty()
       .withMessage("Please provide a thumbnail of the car"), // on error this message is sent.
 
-      // lastname is required and must be string
+
       body("inv_price")
       .trim()
       .escape()
@@ -102,7 +101,7 @@ validate.inventoryRules = () => {
       .isNumeric()
       .withMessage("Please provide the price of the car"), // on error this message is sent.
 
-      // lastname is required and must be string
+
       body("inv_year")
       .trim()
       .escape()
@@ -111,7 +110,7 @@ validate.inventoryRules = () => {
       .isLength({ min: 4, max: 4 })
       .withMessage("Please provide the year of the car"), // on error this message is sent.
 
-      // lastname is required and must be string
+
       body("inv_miles")
       .trim()
       .escape()
@@ -119,7 +118,7 @@ validate.inventoryRules = () => {
       .isNumeric()
       .withMessage("Please provide the miles of the car"), // on error this message is sent.
 
-      // lastname is required and must be string
+
       body("inv_color")
       .trim()
       .escape()
@@ -133,16 +132,16 @@ validate.inventoryRules = () => {
  * Check data and return errors or continue to registration
  * ***************************** */
 validate.checkInventoryData = async (req, res, next) => {
-    const { classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color } = req.body
+    const { classificationList, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color } = req.body
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
       let nav = await utilities.getNav()
       res.render("inventory/add-inventory", {
         errors,
-        title: "Add Inventory",
+        title: "New Inventory",
         nav,
-        classification_id,
+        classificationList,
         inv_make,
         inv_model,
         inv_description,
