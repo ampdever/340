@@ -8,6 +8,8 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin))
 
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
 
+router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.goodLogin))
+
 // Process the registration data
 router.post(
     "/register",
@@ -17,11 +19,25 @@ router.post(
   )
 
 // Process the login attempt
+///////////////////// This was what we used without the Jwt. 
+// router.post(
+//     "/login",
+//     (req, res) => {
+//       res.status(200).send('login process')
+//     }
+//   )
+
+// Process the login request
 router.post(
-    "/login",
-    (req, res) => {
-      res.status(200).send('login process')
-    }
-  )
+  "/login",
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  utilities.handleErrors(accountController.accountLogin)
+)
 
 module.exports = router;
+
+//// showing the differences of the cookies after successfull logins
+// client - yGG7lJuQftjo82ZpzyUU8
+// employee - QZN_xTF8XpxxjgdGU
+// admin - xYcB_GhY-WTyVc
