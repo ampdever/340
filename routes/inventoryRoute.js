@@ -14,6 +14,15 @@ router.get('/', invController.buildManagement);
 // NEW FOR ADDING STUFF
 router.get("/add-classification", invController.buildAddClassification);
 router.get("/add-inventory", invController.buildAddInventory);
+router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView));
+
+
+// NEW FOR EDITING THE INVENTORY
+router.get(
+  "/getInventory/:classification_id",
+  //utilities.checkAccountType,
+  utilities.handleErrors(invController.getInventoryJSON)
+)
 
 router.post(
     "/add-classification",
@@ -22,11 +31,18 @@ router.post(
     utilities.handleErrors(invController.handleAddClassification)
   )
 
-  router.post(
-    "/add-inventory",
-    regValidate.inventoryRules(),
-    regValidate.checkInventoryData,
-    utilities.handleErrors(invController.handleAddInventory)
-  )
+router.post(
+  "/add-inventory",
+  regValidate.inventoryRules(),
+  regValidate.checkInventoryData,
+  utilities.handleErrors(invController.handleAddInventory)
+)
+
+router.post(
+  "/update/",
+  //regValidate.updateRules(),
+  regValidate.checkUpdateData,
+  utilities.handleErrors(invController.updateInventory)
+)
 
 module.exports = router;

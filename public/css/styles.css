@@ -439,3 +439,63 @@ footer {
 .add-inventory button:hover {
   background-color: #0056b3;
 }
+
+/* FORM FOR EDITING INVENTORY */
+.edit-inventory {
+  background-color: var(--main-accent);
+  border-radius: 10px;
+  padding: 20px;
+  width: 400px;
+  margin: 20px auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  color: black;
+  font-size: 16px;
+}
+
+.edit-inventory p {
+  font-size: 14px;
+  color: black;
+  margin-bottom: 15px;
+  font-style: italic;
+  font-family: 'Arial', sans-serif;
+}
+
+.edit-inventory label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.edit-inventory input,
+.edit-inventory select,
+.edit-inventory textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.edit-inventory textarea {
+  resize: vertical;
+}
+
+.edit-inventory button {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.edit-inventory button:hover {
+  background-color: #218838;
+}
