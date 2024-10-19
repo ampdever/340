@@ -15,6 +15,7 @@ router.get('/', invController.buildManagement);
 router.get("/add-classification", invController.buildAddClassification);
 router.get("/add-inventory", invController.buildAddInventory);
 router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView));
+router.get("/delete/:inv_id", utilities.handleErrors(invController.deleteView));
 
 
 // NEW FOR EDITING THE INVENTORY
@@ -43,6 +44,11 @@ router.post(
   //regValidate.updateRules(),
   regValidate.checkUpdateData,
   utilities.handleErrors(invController.updateInventory)
+)
+
+router.post(
+  "/delete/",
+  utilities.handleErrors(invController.deleteItem)
 )
 
 module.exports = router;

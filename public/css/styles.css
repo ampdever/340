@@ -499,3 +499,62 @@ footer {
 .edit-inventory button:hover {
   background-color: #218838;
 }
+
+/* FORM FOR DELETING INVENTORY */
+.delete-inventory {
+  background-color: var(--main-accent);
+  border-radius: 10px;
+  padding: 20px;
+  width: 400px;
+  margin: 20px auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  color: black;
+  font-size: 16px;
+}
+
+.delete-inventory p {
+  font-size: 14px;
+  color: black;
+  margin-bottom: 15px;
+  font-style: italic;
+  font-family: 'Arial', sans-serif;
+}
+
+.delete-inventory label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.delete-inventory input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.delete-inventory button {
+  width: 100%;
+  padding: 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: not-allowed;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.delete-inventory button[disabled]:hover {
+  background-color: #dc3545;
+}
+
+.delete-inventory .notice {
+  color: red;
+  font-size: 14px;
+}
