@@ -76,7 +76,7 @@ invCont.handleAddClassification = async function (req, res) {
   const { classification_name } = req.body
 
   const regResult = await invModel.addClassification(classification_name)
-
+  const classificationSelect = await utilities.buildClassificationList()
   //moved this line here so the Nav is built after the new classification was submitted
   let nav = await utilities.getNav()
 
@@ -86,10 +86,12 @@ invCont.handleAddClassification = async function (req, res) {
       "notice",
       `${classification_name} was added successfully`
     )
-    res.status(201).render("inventory/management", {
-      title: "Inventory Management",
-      nav,
-    })
+    res.redirect("/inv/")
+    // res.status(201).render("inventory/management", {
+    //   title: "Inventory Management",
+    //   nav,
+    //   classificationSelect,
+    // })
   } else {
     req.flash("notice", "Sorry, the registration failed.")
     res.status(501).render("inventory/add-classification", {

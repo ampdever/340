@@ -9,24 +9,35 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 
 router.get("/detail/:invID", invController.buildSingleItem);
 
-router.get('/', invController.buildManagement);
+router.get('/', 
+  utilities.checkAccountType,
+  invController.buildManagement);
 
 // NEW FOR ADDING STUFF
-router.get("/add-classification", invController.buildAddClassification);
-router.get("/add-inventory", invController.buildAddInventory);
-router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView));
-router.get("/delete/:inv_id", utilities.handleErrors(invController.deleteView));
+router.get("/add-classification", 
+  utilities.checkAccountType,
+  invController.buildAddClassification);
+router.get("/add-inventory", 
+  utilities.checkAccountType,
+  invController.buildAddInventory);
+router.get("/edit/:inv_id", 
+  utilities.checkAccountType,
+  utilities.handleErrors(invController.editInventoryView));
+router.get("/delete/:inv_id", 
+  utilities.checkAccountType,
+  utilities.handleErrors(invController.deleteView));
 
 
 // NEW FOR EDITING THE INVENTORY
 router.get(
   "/getInventory/:classification_id",
-  //utilities.checkAccountType,
+  utilities.checkAccountType,
   utilities.handleErrors(invController.getInventoryJSON)
 )
 
 router.post(
     "/add-classification",
+    utilities.checkAccountType,
     regValidate.classificationRules(),
     regValidate.checkClassificationData,
     utilities.handleErrors(invController.handleAddClassification)
@@ -34,6 +45,7 @@ router.post(
 
 router.post(
   "/add-inventory",
+  utilities.checkAccountType,
   regValidate.inventoryRules(),
   regValidate.checkInventoryData,
   utilities.handleErrors(invController.handleAddInventory)
@@ -41,13 +53,15 @@ router.post(
 
 router.post(
   "/update/",
-  //regValidate.updateRules(),
+  utilities.checkAccountType,
+  regValidate.inventoryRules(),
   regValidate.checkUpdateData,
   utilities.handleErrors(invController.updateInventory)
 )
 
 router.post(
   "/delete/",
+  utilities.checkAccountType,
   utilities.handleErrors(invController.deleteItem)
 )
 

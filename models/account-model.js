@@ -38,4 +38,30 @@ async function getAccountByEmail (account_email) {
   }
 }
 
-module.exports = { registerAccount, checkExistingEmail, getAccountByEmail}
+
+// IRL we don't need the try catch because we would want to put the try catch in the function that calls this
+async function updatePassword (account_password, account_id) {
+  try {
+    const result = await pool.query(
+      `UPDATE account SET account_password = $1
+        WHERE account_id = $2`,
+      [account_password, account_id])
+    return 1
+  } catch (error) {
+    return new Error("Unable to update password")
+  }
+}
+
+async function updateAccount (account_firstname, account_lastname, account_email, account_id) {
+  try {
+    const result = await pool.query(
+      `UPDATE account SET account_firstname = $1, account_lastname = $2, account_email = $3
+      WHERE account_id = $4`,
+      [account_firstname, account_lastname, account_email, account_id])
+    return 1
+  } catch (error) {
+    return new Error("Unable to update information")
+  }
+}
+
+module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, updatePassword, updateAccount}

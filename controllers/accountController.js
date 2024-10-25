@@ -30,6 +30,16 @@ async function goodLogin(req, res, next) {
   })
 }
 
+async function buildUpdate(req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("account/account", {
+    title: "Account Update",
+    nav,
+    accountData: res.locals.accountData,
+    errors: null,
+  })
+}
+
 /* ****************************************
 *  Process Registration
 * *************************************** */
@@ -111,6 +121,79 @@ async function accountLogin(req, res) {
   }
  }
 
+/* ****************************************
+ *  Updating account information
+ * ************************************ */
+ async function updateAccount(req, res, next) {
+  let nav = await utilities.getNav()
+  const {account_firstname, account_lastname, account_email, account_id} = req.body
+  const updateResult = await accountModel.updateAccount(account_firstname, account_lastname, account_email, account_id)
 
+  if(updateResult) {
+    req.session.account_firstname = account_firstname
+    req.session.accountData = {
+      ...req.session.accountData,
+      account_firstname,
+      account_lastname,
+      account_email
+    }
+    res.locals.accountData = req.session.accountData
+    req.flash("notice", `Your account was successfully updated.`)
+    res.redirect("/account/")
+  } else {
+    req.flash("notice", "Sorry unable to update.")
+  }
+}
+
+/* ****************************************
+ *  Updating password
+ * ************************************ */
+async function updatePassword(req, res, next) {
+  let nav = await utilities.getNav()
+  const { account_password, account_id } = req.body
+
+  // Hash the password before storing
+  let hashedPassword
+  try {
+      // regular password and cost (salt is generated automatically)
+      hashedPassword = await bcrypt.hashSync(account_password, 10)
+      const updateResult = await accountModel.updatePassword(hashedPassword, account_id)
+  } catch (error) {
+      req.flash("notice", 'Sorry, there was an error processing the registration.')
+      res.status(500).render("account/account", {
+      title: "Edit Account",
+      nav,
+      errors: null,
+      })
+  }
+
+  const regResult = await accountModel.registerAccount(hashedPassword, account_id)
+
+  if (regResult) {
+    req.flash(
+      "notice",
+      `Congratulations, you updated your password.`
+    )
+    res.status(201).render("account/account", {
+      title: "Edit Account",
+      nav,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", "Sorry, the registration failed.")
+    res.status(501).render("account/account", {
+      title: "Edit Account",
+      nav,
+      errors: null,
+    })
+  }
+}
   
-  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, goodLogin}
+  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, goodLogin, buildUpdate, updateAccount, updatePassword}
+
+
+  // $2a$10$iDLfW7azXG8sWd4hOkpgc.9li6mZU4pi30cUmZ7SnOT.7RW5oXqfi
+  // $2a$10$iDLfW7azXG8sWd4hOkpgc.9li6mZU4pi30cUmZ7SnOT.7RW5oXqfi
+  // $2a$10$iDLfW7azXG8sWd4hOkpgc.9li6mZU4pi30cUmZ7SnOT.7RW5oXqfi
+  // $2a$10$mlatD0oB4414E3MSaAvm1.1HkcEyJXlJ2E1WCMxIDSTNqPYsApM9e
+  // $2a$10$C8Lp4x1zL4sdFam723DhsOe.FxiQhkY5sB1cwHtfF5kGtpfInOa2.
