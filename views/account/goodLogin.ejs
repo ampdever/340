@@ -19,12 +19,15 @@
       <a title="edit-account" href="/account/account">Edit Account Information</a>
       <br>
 
-      <!--
-      /* ****************************************
-      *  IS THIS OKAY FOR TASK 2
-      * ************************************ */ -->
       <% if (locals.accountData.account_type == 'Employee' || locals.accountData.account_type == 'Admin') { %>
 
         <a title="edit-inventory" href="/inv">Manage Inventory</a>
 
+      <% } %>
+      <br>
+      <% if (locals.loggedin) { %>
+        <h2>My Reviews</h2>
+        <a title="add-review" href="/review/add-review">Add Review - Testing</a>
+
+        <!-- This is where I'm going to put my reviews inforamtion -->
       <% } %>

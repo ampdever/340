@@ -1,0 +1,8 @@
+<h2>Your Reviews</h2>
+<% userReviews.forEach(review => { %>
+  <div>
+    <p><%= review.reviewText %> on <%= review.date %></p>
+    <a href="/review/edit/<%= review.reviewId %>">Edit</a>
+    <a href="/review/delete/<%= review.reviewId %>">Delete</a>
+  </div>
+<% }) %>

@@ -1,0 +1,13 @@
+<h2>Reviews</h2>
+<% reviews.forEach(review => { %>
+  <div>
+    <p><strong><%= review.screenName %></strong> on <%= review.date %>:</p>
+    <p><%= review.reviewText %></p>
+  </div>
+<% }) %>
+<% if (loggedIn) { %>
+  <h3>Add Your Review:</h3>
+  <a href="/review/add?inv_id=<%= invId %>">Write a review</a>
+<% } else { %>
+  <p><a href="/login">Log in</a> to write a review</p>
+<% } %>

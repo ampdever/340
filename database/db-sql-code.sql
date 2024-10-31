@@ -255,3 +255,12 @@ WHERE c.classification_name = 'Sport';
 UPDATE public.inventory
 SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
     inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');
+
+-- create the reveiw table for the review system
+CREATE TABLE review (
+    review_id SERIAL PRIMARY KEY,
+    review_text TEXT NOT NULL,
+    review_date TIMESTAMPTZ DEFAULT NOW() NOT NULL,
+    inv_id INTEGER NOT NULL REFERENCES inventory(inv_id),
+    account_id INTEGER NOT NULL REFERENCES account(account_id)
+);

@@ -23,6 +23,7 @@ async function buildRegister(req, res, next) {
 
 async function goodLogin(req, res, next) {
   let nav = await utilities.getNav()
+  
   res.render("account/goodLogin", {
     title: "Account Management",
     nav,
